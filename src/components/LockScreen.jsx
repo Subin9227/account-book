@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const PASSWORD = '우리집9227'
+const PASSWORD = '9227'
 
 export default function LockScreen({ onUnlock }) {
   const [input, setInput] = useState('')
