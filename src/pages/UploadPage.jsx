@@ -58,8 +58,17 @@ export default function UploadPage() {
       }
 
       const result = await parseReceiptText(text)
-      // discount가 없는 품목은 0으로
-      result.items = result.items.map((item) => ({ ...item, discount: item.discount || 0 }))
+      const validLarge = ['식료품', '생활용품', '기타']
+      result.items = result.items.map((item) => {
+        const large = (item.category_large || '').trim()
+        const medium = (item.category_medium || '').trim()
+        return {
+          ...item,
+          discount: item.discount || 0,
+          category_large: validLarge.includes(large) ? large : '식료품',
+          category_medium: medium,
+        }
+      })
       // 단수할인 자동 설정
       setRoundingDiscount(result.rounding_discount ? String(result.rounding_discount) : '')
       setParsedData(result)

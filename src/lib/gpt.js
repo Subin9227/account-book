@@ -61,5 +61,7 @@ JSON만 응답해. 다른 텍스트 없이.`,
   })
 
   const data = await response.json()
-  return JSON.parse(data.choices[0].message.content)
+  const parsed = JSON.parse(data.choices[0].message.content)
+  console.log('GPT 응답:', JSON.stringify(parsed, null, 2))
+  return parsed
 }
